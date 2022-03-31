@@ -36,7 +36,7 @@ class App:
         self.m_excel = ExcelIO()
 
         self.m_screen.add_screen("Config",
-                                 [LabelCustom(self.window, "Load Config"), 0.5, 0.25],
+                                 [LabelCustom(self.window, "Load Excel File"), 0.5, 0.25],
                                  [FileButtonCustom(self.window, self.validate_form, data_type='xlsx'), 0.5, 0.5])
         self.m_screen.add_screen("Home",
                                  [LabelCustom(self.window, "Upload Text File"), 0.5, 0.25],
@@ -69,7 +69,6 @@ class App:
         self.window.iconphoto(False, photo)
 
         App.current_inst = self
-
 
         self.m_screen.get_screen("Config").set_screen()
 
@@ -257,8 +256,6 @@ class LabelCustom(WidgetCustom):
         super().__init__(self.widget, self.text)
 
 
-
-
 class InputCustom(WidgetCustom):
     """Form input subclass of form widget.
 
@@ -311,7 +308,7 @@ class FileButtonCustom(WidgetCustom):
     a file dialog input system when clicked."""
 
     def __init__(self,
-                 window, validated_cmd, invalidated_cmd = None, data_type='txt'):
+                 window, validated_cmd, invalidated_cmd=None, data_type='txt'):
         self.widget = Button(
             window,
             text="Browse File System",
@@ -333,7 +330,7 @@ class FileButtonCustom(WidgetCustom):
 
         temp_name = filedialog.askopenfilename(title="Select a File",
                                                filetypes=
-                                               (("File", str("."+self.file_type)),
+                                               (("File", str("." + self.file_type)),
                                                 ("all files", "*.*")))
         if self.file_name != '' and temp_name == '':
             return
@@ -402,6 +399,7 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     print(os.path.join(base_path, relative_path))
     return os.path.join(base_path, relative_path)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__' and len(sys.argv) >= 1:
