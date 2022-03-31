@@ -64,8 +64,12 @@ class App:
         App.window.config(background="black")
         App.window.minsize(width=self.dim_x, height=self.dim_y)
         App.window.maxsize(width=self.dim_x, height=self.dim_y)
+        print(os.path.abspath(os.path.curdir))
+        photo = PhotoImage(file=resource_path('resources/logo.png'))
+        self.window.iconphoto(False, photo)
 
         App.current_inst = self
+
 
         self.m_screen.get_screen("Config").set_screen()
 
@@ -387,6 +391,17 @@ class ScreenManager:
     def add_screen(self, name, *args: WidgetCustom) -> None:
         self.screens[name] = ScreenCustom(self, *args)
 
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        import sys
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    print(os.path.join(base_path, relative_path))
+    return os.path.join(base_path, relative_path)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__' and len(sys.argv) >= 1:
