@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 64,2851,4,5,4,6,4,Yes,No,3,5,2,6,TRAV,15,fmdkmfdlaf, I dunno
+=======
+64,2851,4,5,4,6,4,Yes,No,3,5,2,6,TRAV,15,fmdkmfdlaf, I dunno
+>>>>>>> 1695a656a50cf9fddc12394b6f964ecb35d274b5
