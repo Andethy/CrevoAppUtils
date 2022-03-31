@@ -32,7 +32,6 @@ class App:
         self.dim_y = 267
 
         self.m_file = FileIO()
-        self.m_file.set_file('/Users/jackhayley/Downloads/txt.txt')
         self.m_excel = ExcelIO()
 
         self.m_screen.add_screen("Config",
@@ -89,7 +88,7 @@ class App:
 
 
 class FileIO:
-    data: list[str]
+    #data: list[str]
 
     def __init__(self):
         self.file = ''
@@ -358,7 +357,7 @@ class FileButtonCustom(WidgetCustom):
 
 
 class ScreenCustom:
-    widgets: list[WidgetCustom]
+    #widgets: list[WidgetCustom]
 
     def __init__(self, screen_manager, *args):
         assert isinstance(screen_manager, ScreenManager)
@@ -406,11 +405,3 @@ def resource_path(relative_path):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__' and len(sys.argv) >= 1:
     am = App(*sys.argv)
-    fileIO = FileIO()
-    fileIO.set_file('/Users/jackhayley/Downloads/txt.txt')
-    excelIO = ExcelIO()
-    excelIO.set_workbook('/Users/jackhayley/Downloads/test.xlsx')
-    dt = fileIO.get_data()
-    print(dt)
-    excelIO.modify_spreadsheet(dt)
-    print(fileIO.get_data())
