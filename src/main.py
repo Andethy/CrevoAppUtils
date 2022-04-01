@@ -97,22 +97,27 @@ class FileIO:
         self.file = open(file_path)
 
     def get_data(self):
-        self.data = self.file.read().split(',')
-        allowed_length = len(ExcelIO.export_columns)
-        while len(self.data) > allowed_length:
-            self.data[allowed_length - 1] = ','.join([self.data[allowed_length - 1], self.data[allowed_length]])
-            del self.data[allowed_length]
-        for n, dt in enumerate(self.data):
-            try:
-                self.data[n] = int(dt)
-            except ValueError:
-                continue
+        lines = self.file.read().splitlines()
+        for line in lines:
+            data_local = line.split(',')
+            allowed_length = len(ExcelIO.export_columns)
+            while len(self.data) > allowed_length:
+                data_local[allowed_length - 1] = ','.join([data_local[allowed_length - 1], data_local[allowed_length]])
+                del data_local[allowed_length]
+            for n, dt in enumerate(data_local):
+                try:
+                    data_local[n] = int(dt)
+                except ValueError:
+                    continue
+            self.data.append(tuple(data_local))
+        self.file.close()
         return self.data
 
 
 class ExcelIO:
     workbook: Workbook
-    export_columns = (1, 2, 3, 4, 6, 7, 9, 10, 12, 14, 15, 17, 18, 20, 22, 23)
+    # export_columns = (1, 2, 3, 4, 6, 7, 9, 10, 12, 14, 15, 17, 18, 20, 22, 23)
+    export_columns = tuple([n for n in range(1, 19)])
 
     def __init__(self):
         self.workbook = Workbook
@@ -137,19 +142,16 @@ class ExcelIO:
         return letter + str(y)
 
     def modify_spreadsheet(self, data, start_checking=1):
-
-        export_row = start_checking
-        while self.worksheet[self.get_cell(1, export_row)].value is not None:
-            export_row += 1
-
-        for n, column in enumerate(ExcelIO.export_columns):
-            self.worksheet[self.get_cell(column, export_row)].value = data[n]
+        print(data)
+        for i, inst in enumerate(data):
+            export_row = start_checking
+            while self.worksheet[self.get_cell(1, export_row)].value is not None:
+                export_row += 1
+            for n, column in enumerate(ExcelIO.export_columns):
+                print(self.get_cell(column, export_row))
+                self.worksheet[self.get_cell(column, export_row)].value = inst[n]
 
         self.workbook.save(self.name)
-
-
-class Utils:
-    pass
 
 
 class WidgetCustom:
@@ -403,3 +405,4 @@ def resource_path(relative_path):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__' and len(sys.argv) >= 1:
     am = App(*sys.argv)
+

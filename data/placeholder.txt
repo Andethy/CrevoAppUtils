@@ -1,0 +1,5 @@
+50,2851,5,4,7,4,3,Yes,No,No,Yes,7,4,6,4,Traversal,00:15,test qr code file
+50,2851,5,4,7,4,3,Yes,No,No,Yes,7,4,6,4,Traversal,00:15,test qr code file
+50,2851,5,4,7,4,3,Yes,No,No,Yes,7,4,6,4,Traversal,00:15,test qr code file
+50,2851,5,4,7,4,3,Yes,No,No,Yes,7,4,6,4,Traversal,00:15,test qr code file
+50,2851,5,4,7,4,3,Yes,No,No,Yes,7,4,6,4,Traversal,00:15,test qr code file
