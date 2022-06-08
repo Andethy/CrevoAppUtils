@@ -1,0 +1,1 @@
+Processed scouting files will be automatically moved to this folder in auto mode.

@@ -84,6 +84,8 @@ class JsonApp(App):
             if not self.running: break
             if all([self.m_screen('Config').widgets['auto_button'].get_value() == 1, self.m_input_dir.files_exist()]):
                 for file in self.m_input_dir.get_files_of_type('txt'):
+                    if file == 'placeholder.txt':
+                        continue
                     self.input_validated(self.m_input_dir.get_file_path(file))
                     self.update_csv()
                     self.m_input_dir.move_file(file, self.m_used_dir)
