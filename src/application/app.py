@@ -18,9 +18,9 @@ class App:
                                              logo=DEFAULT_LOGO,
                                              dpi=DEFAULT_DPI,
                                              dimensions=DEFAULT_DIMENSIONS,
-                                             background=DEFAULT_BACKGROUND,
                                              lock=DEFAULT_DIMENSIONS_LOCK,
-                                             screens=DEFAULT_SCREEN)
+                                             background=DEFAULT_BACKGROUND,
+                                             screens=[DEFAULT_SCREEN])
 
     def __init__(self, *args, **kwargs):
         self.app_fields = App.app_fields_master
@@ -40,17 +40,15 @@ class App:
             sys.exit(1)
 
         print(self.app_fields)
-        # print(App.application_fields_master["title"])
 
         self.window = Tk()
-        # App.window = self.window
-        # Configure window dimensions & basic formatting
         self.m_screen = ScreenManager(self.window)
         self.dim_x = self.app_fields['dimensions'][0]
         self.dim_y = self.app_fields['dimensions'][1]
 
+
         for screen in self.app_fields['screens']:
-            print("SCREEN: ",screen)
+            print("SCREEN: ", screen)
             self.m_screen.add_screen(screen[0], screen[1])
 
         self.window.title(self.app_fields['title'])
@@ -72,5 +70,4 @@ class App:
         self.m_screen.get_screen(index=0).set_screen()
 
         self.window.mainloop()
-
 

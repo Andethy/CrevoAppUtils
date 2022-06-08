@@ -6,6 +6,7 @@ from src.application.app import App
 from src.application.utils import *
 from src.application.constants import *
 from multitasking import task as multi
+from shutil import copy as copy
 
 
 class JsonApp(App):
@@ -16,7 +17,8 @@ class JsonApp(App):
         self.m_file = BaseFileIO()
         self.m_entry = JsonIO()
         self.m_output = JsonToCsvIO()
-        self.m_directory = DirectoryIO('manipulator_json/input_folder')
+        self.m_input_dir = DirectoryIO('manipulator_json/input_folder')
+        self.m_used_dir = DirectoryIO('manipulator_json/used_folder')
 
         self.m_entry.set_file(JsonApp.json_file_dev_path)
         self.m_output.set_file(JsonApp.csv_file_dev_path)
@@ -80,11 +82,11 @@ class JsonApp(App):
         while self.running:
             time.sleep(1)
             if not self.running: break
-            if all([self.m_screen('Config').widgets['auto_button'].get_value() == 1, self.m_directory.files_exist()]):
-                for file in self.m_directory.get_files_of_type('txt'):
-                    self.input_validated(self.m_directory.get_file_path(file))
+            if all([self.m_screen('Config').widgets['auto_button'].get_value() == 1, self.m_input_dir.files_exist()]):
+                for file in self.m_input_dir.get_files_of_type('txt'):
+                    self.input_validated(self.m_input_dir.get_file_path(file))
                     self.update_csv()
-                    self.m_directory.delete_file(file)
+                    self.m_input_dir.move_file(file, self.m_used_dir)
 
 
 class JsonIO(BaseFileIO):
@@ -154,6 +156,15 @@ class DirectoryIO(BaseDirectoryIO):
                 files.append(file)
         print('FILES FOUND: ', files)
         return files
+
+    def move_file(self, file, output_dir):
+        """
+
+        :type file: str
+        :type output_dir: DirectoryIO
+        """
+        copy(self.get_file_path(file), output_dir())
+        self.delete_file(file)
 
     def delete_file(self, file):
         try:

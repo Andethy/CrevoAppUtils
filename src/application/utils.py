@@ -86,15 +86,16 @@ class CsvFileIO(BaseFileIO):
     def __init__(self):
         super().__init__()
 
-
-
     # def editCsv(self):
 
 
 class BaseDirectoryIO:
 
-    def __init__(self, dir_path = ''):
+    def __init__(self, dir_path=''):
         self.dir_path = dir_path
+
+    def __call__(self):
+        return self.dir_path
 
 
 def resource_path(relative_path):

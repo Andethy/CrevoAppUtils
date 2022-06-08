@@ -9,7 +9,11 @@ DEFAULT_DIMENSIONS: tuple[int, int] = (500, 500)
 DEFAULT_DIMENSIONS_LOCK: bool = True
 DEFAULT_TITLE: str = 'Crevolution Placeholder App'
 DEFAULT_BACKGROUND: str = 'black'
-DEFAULT_SCREEN: list[list[str, list[WidgetCustom, float, float]]] = [['Test', [LabelCustom('Test'), 0.5, 0.25]]]
+DEFAULT_SCREEN: list[str, dict[str, list[str, list[WidgetCustom, float, float]]]] = ['Test',
+                                                                                     dict(placeholder=[
+                                                                                         LabelCustom('Test'),
+                                                                                         0.5,
+                                                                                         0.25])]
 
 # Edit this in correspondence with the fields for the export location
 FIELD_KEYS: tuple = ('Team #',

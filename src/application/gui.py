@@ -294,4 +294,5 @@ class ScreenManager:
         return screen
 
     def add_screen(self, name, kwargs: dict[str, list[WidgetCustom, float, float]]) -> None:
+        print('SCREEN KWARGS: ',kwargs)
         self.screens[name] = ScreenCustom(self, **kwargs)
